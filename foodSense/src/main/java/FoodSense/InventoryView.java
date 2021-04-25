@@ -8,10 +8,20 @@ import java.util.ArrayList;
 public class InventoryView {
 
     private ArrayList<Item> inventory;
+    //private InventoryController controller;
+    //private InventoryModel model;
 
     public InventoryView(){
         inventory = null;
     }
+
+    //public void setController(InventoryController controller){
+    //    this.controller = controller;
+    //}
+
+    //public void setModel(InventoryModel model){
+    //    this.model = model;
+    //}
 
     /**
      * Replaces the inventory with the new inventory
@@ -27,7 +37,7 @@ public class InventoryView {
      */
     public String displayInventory(){
         //System.out.println("Inventory:\n");
-        //for(com.example.demo.Item i: inventory){
+        //for(com.example.demo.inventory.Item i: inventory){
         //    System.out.println(i.toString());
         //}
         String output = "<h3>Inventory:</h2><ul>";
@@ -36,7 +46,9 @@ public class InventoryView {
         }
         else {
             for (Item i : inventory) {
-                output += "<li>" + i.toString() + "</li>";
+                if(i.isInStock()) {
+                    output += "<li>" + i + "</li>";
+                }
             }
         }
         output += "</ul>";
