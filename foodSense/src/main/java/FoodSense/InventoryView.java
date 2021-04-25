@@ -13,24 +13,33 @@ public class InventoryView {
         inventory = null;
     }
 
+    /**
+     * Replaces the inventory with the new inventory
+     * @param newList inventory items that will replace current inventory
+     */
     public void updateInventory(ArrayList<Item> newList){
         inventory = newList;
     }
 
+    /**
+     * displays inventory for a web page
+     * @return the HTML for a web page displaying the inventory
+     */
     public String displayInventory(){
         //System.out.println("Inventory:\n");
         //for(com.example.demo.Item i: inventory){
         //    System.out.println(i.toString());
         //}
-        String output = "Inventory:\n\n";
+        String output = "<h3>Inventory:</h2><ul>";
         if(inventory == null){
-            output = output + "No items";
+            output += "<li>No items</li>";
         }
         else {
             for (Item i : inventory) {
-                output = output + i.toString();
+                output += "<li>" + i.toString() + "</li>";
             }
         }
+        output += "</ul>";
         return output;
     }
 }
