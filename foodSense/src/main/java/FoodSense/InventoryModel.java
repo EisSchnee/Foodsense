@@ -9,7 +9,9 @@ import java.util.HashMap;
 
 public class InventoryModel {
 
-    private HashMap<Integer,Item> items;
+    private HashMap<Integer, Item> items;
+    //private InventoryController controller;
+    private InventoryView view;
 
     /**
      * Holds the inventory
@@ -18,12 +20,21 @@ public class InventoryModel {
         items = new HashMap<>();
     }
 
+    //public void setController(InventoryController controller){
+    //    this.controller = controller;
+    //}
+
+    public void setView(InventoryView view){
+        this.view = view;
+    }
+
     /**
      * Adds item to inventory
      * @param item item to be added to inventory
      */
     public void addItem(Item item){
         items.put(item.getItemID(),item);
+        view.updateInventory(getItems());
     }
 
     /**
@@ -42,9 +53,13 @@ public class InventoryModel {
      */
     public Item removeItem(int ID){
         //return items.remove(ID);
-        items.get(ID).removeFromStock();
-        Item temp = items.get(ID);
-        return temp;
+        if(items.get(ID) != null) {
+            items.get(ID).removeFromStock();
+            Item temp = items.get(ID);
+            view.updateInventory(getItems());
+            return temp;
+        }
+        return null;
     }
 
 }
