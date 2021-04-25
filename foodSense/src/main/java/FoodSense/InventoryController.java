@@ -21,6 +21,10 @@ public class InventoryController {
     public InventoryController(){
         view = new InventoryView();
         model = new InventoryModel();
+        //view.setController(this);
+        //view.setModel(model);
+        //model.setController(this);
+        model.setView(view);
         //createItem("Pear",0); //test code
         //createItem("Apple",1);
     }
@@ -32,10 +36,10 @@ public class InventoryController {
      * @return created item
      */
     public void createItem(String name, int ID){
-        //return new com.example.demo.Item(name,ID);
+        //return new com.example.demo.inventory.Item(name,ID);
         Item item = new Item(name,ID);
         model.addItem(item);
-        view.updateInventory(model.getItems());
+        //view.updateInventory(model.getItems());
     }
 
     /**
@@ -57,9 +61,23 @@ public class InventoryController {
     }
 
     @GetMapping("/inventory")
-    public String displayInventory(){
+    public String displayInventory1(){
         return view.displayInventory();
     }
+
+    //@GetMapping("/inventory2")
+    //public String displayInventory2(){
+    //    createItem("Pear",0);
+    //    createItem("Apple",1);
+    //    return view.displayInventory();
+    //}
+
+    //@GetMapping("/inventory3")
+    //public String displayInventory3(){
+    //    model.removeItem(0);
+    //    return view.displayInventory();
+    //}
+
 
     /**
      * To see if the inventory is displaying properly, run this class and go to http:localhost:8080/inventory.
@@ -68,5 +86,7 @@ public class InventoryController {
     public static void main(String[] args) {
         SpringApplication.run(InventoryController.class,args);
         //SpringApplication application = new SpringApplication();
+        //InventoryController controller = new InventoryController();
+        //SpringApplication.run(controller.class,args);
     }
 }
