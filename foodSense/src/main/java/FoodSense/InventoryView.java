@@ -1,4 +1,4 @@
-package inventory;
+package FoodSense.inventory;
 
 import java.util.ArrayList;
 
