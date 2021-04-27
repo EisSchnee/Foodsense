@@ -25,8 +25,8 @@ public class InventoryController {
         //view.setModel(model);
         //model.setController(this);
         model.setView(view);
-        createItem("Pear",0,1); //test code
-        createItem("Apple",1,0);
+        //createItem("Pear",0,1); //test code
+        //createItem("Apple",1,0);
     }
 
     /**
