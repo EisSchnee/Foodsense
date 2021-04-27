@@ -1,5 +1,4 @@
-// package inventory;
-package FoodSense;
+package FoodSense.inventory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,15 +25,14 @@ public class InventoryController {
         //view.setModel(model);
         //model.setController(this);
         model.setView(view);
-        //createItem("Pear",0); //test code
-        //createItem("Apple",1);
+        //createItem("Pear",0,"Left"); //test code
+        //createItem("Apple",1,"Right");
     }
 
     /**
      * creates a new item
      * @param name name of item
      * @param ID ID of item
-     * @return created item
      */
     public void createItem(String name, int ID){
         //return new com.example.demo.inventory.Item(name,ID);
@@ -42,6 +40,21 @@ public class InventoryController {
         model.addItem(item);
         //view.updateInventory(model.getItems());
     }
+
+    /**
+     * creates a new item
+     * @param name name of item
+     * @param ID ID of item
+     * @param location location of item
+     */
+    public void createItem(String name, int ID, String location){
+        Item item = new Item(name,ID,location);
+        model.addItem(item);
+    }
+
+    //public void createItem(Item item){
+    //    model.addItem(item);
+    //}
 
     /**
      * Retrieves list of items

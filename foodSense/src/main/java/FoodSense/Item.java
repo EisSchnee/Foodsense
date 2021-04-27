@@ -1,5 +1,4 @@
-// package inventory;
-package FoodSense;
+package FoodSense.inventory;
 
 /**
  * @author Joseph Grieser
@@ -21,6 +20,13 @@ public class Item {
         this.ItemID = ItemID;
         inStock = true;
         location = "";
+    }
+
+    public Item(String name, int ItemID, String location){
+        this.name = name;
+        this.ItemID = ItemID;
+        inStock = true;
+        this.location = location;
     }
 
     /**
@@ -72,6 +78,6 @@ public class Item {
      * @return String of attributes in item
      */
     public String toString(){
-        return "Name: " + name + "  ID: " + ItemID + "\n";
+        return "Name: " + name + "  ID: " + ItemID + "  Location: " + location;
     }
 }

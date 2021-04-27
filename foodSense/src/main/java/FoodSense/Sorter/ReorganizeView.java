@@ -1,5 +1,7 @@
 package FoodSense.Sorter;
 
+import FoodSense.inventory.Item;
+
 /**
  * @author Benjamin Grimes
  */
@@ -7,18 +9,24 @@ public class ReorganizeView {
 
     private double progress;
 
+    public ReorganizeView(){
+        progress = 0;
+    }
     /**
      * Displays the completion screen to the user
      */
-    private void displayCompletionScreen(){
-        //TODO
+    protected String displayCompletionScreen(){
+        return "<h3>Complete</h2>";
     }
 
     /**
      * displays the progress bar screen
      */
-    private void displayProgressBar(){
-        //TODO
+
+    protected String displayProgressBar(){
+        String output = "<h3>Progress </h2>" + "<progress value = \"" +
+                ((int) progress) + "\" max = \"100\"/>";
+        return output;
     }
 
     /**
@@ -27,14 +35,18 @@ public class ReorganizeView {
      * @param progress
      * a double between 0 and 100 to show on the progress bar
      */
-    private void updateProgressBar(double progress){
-        //TODO
+    protected void updateProgressBar(double progress){
+        this.progress = progress;
     }
 
-    /**
-     * exits and tears down the UI
-     */
-    private void exit(){
-        //TODO
+
+    protected String displayScreen(){
+        String result;
+        if(progress >= 100){
+            result = displayCompletionScreen();
+        }else{
+            result = displayProgressBar();
+        }
+        return result;
     }
 }

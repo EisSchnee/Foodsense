@@ -1,6 +1,4 @@
-// package inventory;
-package FoodSense;
-
+package FoodSense.inventory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +47,7 @@ public class InventoryModel {
     }
 
     /**
-     * Removes item in invventory
+     * Removes item in inventory
      * @param ID ID of item to be removed
      * @return removed item
      */

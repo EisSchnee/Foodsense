@@ -1,36 +1,47 @@
 package FoodSense;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
+//import java.util.LinkedList;
+
+import FoodSense.inventory.InventoryController;
+import FoodSense.inventory.Item;
 
 /**
  * @author Benjamin Grimes
  */
 public class InventoryService {
 
+   static InventoryController inventory;
+   public static void setInventory(InventoryController inv){
+       inventory = inv;
+   }
 
-
-    public LinkedList<Integer> getActiveIDs() {
-        ArrayList<Items.Item> allItems = Items.getItems();
-        LinkedList<Integer> IDs = new LinkedList<>();
-        for(int i = 0; i < allItems.size(); i++){
-            IDs.add(allItems.get(i).getItemID());
-        }
-        return IDs;
-    }
-
-
-    public ArrayList<Double> getPrices(ArrayList<Integer> IDs){
-        ArrayList<Items.Item> allItems = Items.getItems();
-        ArrayList<Double> prices = new ArrayList<>();
-        prices.ensureCapacity(IDs.size());
-        for(int i = 0; i < allItems.size(); i++){
-            for(int j = 0; j < IDs.size(); j++){
-                if(allItems.get(i).getItemID() == IDs.get(j)){
-                    prices.set(j, allItems.get(i).getItemPrice());
+    static public HashMap<Integer, Integer> getActiveAislesAndIDs() {
+        HashMap<Integer, Integer> result = new HashMap<>();
+        if(inventory != null) {
+            ArrayList<Item> allItems = inventory.getItems();
+            if(allItems != null) {
+                for (int i = 0; i < allItems.size(); i++) {
+                    Item item = allItems.get(i);
+                    //result.put(item.getItemID(), item.getAisle());
                 }
             }
         }
-        return prices;
+        return result;
+    }
+
+
+    public static ArrayList<Double> getPrices(InventoryController inventory, ArrayList<Integer> IDs){
+        ArrayList<Double> result = new ArrayList<>();
+        if(inventory != null) {
+            ArrayList<Item> allItems = inventory.getItems();
+
+            for (int i = 0; i < allItems.size(); i++) {
+                Item item = allItems.get(i);
+                //result.add(item.getPrice());
+            }
+        }
+        return result;
     }
 }
