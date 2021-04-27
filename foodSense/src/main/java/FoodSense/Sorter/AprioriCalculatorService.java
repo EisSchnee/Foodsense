@@ -22,8 +22,6 @@ public class AprioriCalculatorService {
      * A linkedList of MatrixNodes for easy addition to matrix
      ******************************************************************************************/
     public static LinkedList<ArrayList<Integer>> AprioriCalc(LinkedList<Integer> purchases){
-        LinkedList<ArrayList<Integer>> result = new LinkedList<>();
-
         ArrayList<Integer> uniquePurchases = convertToArrayList(removeDuplicates(purchases));
         return powerSet(uniquePurchases);
     }
@@ -35,7 +33,7 @@ public class AprioriCalculatorService {
      * @return
      * new list with no duplicates
      */
-    protected static LinkedList<Integer> removeDuplicates(LinkedList<Integer> input){
+    private static LinkedList<Integer> removeDuplicates(LinkedList<Integer> input){
         LinkedList<Integer> result = new LinkedList<>();
         Iterator<Integer> iter = input.iterator();
         while(iter.hasNext()){
@@ -54,7 +52,7 @@ public class AprioriCalculatorService {
      * @return
      * the input as an arraylist
      */
-    protected static ArrayList<Integer> convertToArrayList(LinkedList<Integer> input){
+    private static ArrayList<Integer> convertToArrayList(LinkedList<Integer> input){
         ArrayList<Integer> result = new ArrayList<>();
         Iterator<Integer> iter = input.iterator();
         while(iter.hasNext()){
@@ -70,7 +68,7 @@ public class AprioriCalculatorService {
      * @return
      * a linkedList of all subsets of the input
      */
-    protected static LinkedList<ArrayList<Integer>> powerSet(ArrayList<Integer> set){
+   private static LinkedList<ArrayList<Integer>> powerSet(ArrayList<Integer> set){
         //LinkedList<ArrayList<Integer>> result = new LinkedList<>();
         return findSubsets(set, set.size());
     }
@@ -82,6 +80,7 @@ public class AprioriCalculatorService {
      * @param size
      * the size of subsets to find
      * @return
+     * All subsets of the incoming set of size size or smaller
      */
     private static LinkedList<ArrayList<Integer>> findSubsets(ArrayList<Integer> set, int size){
         LinkedList<ArrayList<Integer>> result = new LinkedList<>();
@@ -91,9 +90,7 @@ public class AprioriCalculatorService {
                 temp.add(set.get(i));
                 result.add(temp);
             }
-        }else if(size == 0){
-            //do nothing
-        }else{
+        }else if(size != 0){
             LinkedList<ArrayList<Integer>>  lowerSets = findSubsets(set, size-1);
             result.addAll(lowerSets);
             Iterator<ArrayList<Integer>> iter = lowerSets.iterator();

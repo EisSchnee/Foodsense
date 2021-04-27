@@ -1,6 +1,5 @@
 package FoodSense.Sorter;
 
-import FoodSense.inventory.Item;
 
 /**
  * @author Benjamin Grimes
@@ -24,9 +23,8 @@ public class ReorganizeView {
      */
 
     protected String displayProgressBar(){
-        String output = "<h3>Progress </h2>" + "<progress value = \"" +
+        return "<h3>Progress </h2>" + "<progress value = \"" +
                 ((int) progress) + "\" max = \"100\"/>";
-        return output;
     }
 
     /**

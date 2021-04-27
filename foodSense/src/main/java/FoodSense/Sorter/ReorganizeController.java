@@ -2,18 +2,13 @@ package FoodSense.Sorter;
 
 import FoodSense.InventoryService;
 import FoodSense.inventory.InventoryController;
-//import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -70,7 +65,7 @@ public class ReorganizeController {
         proximCalc.setPurchaseData(model.getPurchaseData());
         Thread newThread = new Thread(proximCalc);
         view.displayProgressBar();
-        newThread.run();
+        newThread.start();
         boolean stillRunning = true;
         while(stillRunning){
             double progress = proximCalc.getProgress();
@@ -80,7 +75,7 @@ public class ReorganizeController {
                 stillRunning = false;
             }
         }
-        //inventory.updateSorting(proximCalc.getLastSorting());
+        inventory.updateSorting(proximCalc.getLastSorting());
         view.displayCompletionScreen();
     }
     @GetMapping("/sorter")

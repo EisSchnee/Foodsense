@@ -24,7 +24,7 @@ public class InventoryService {
             if(allItems != null) {
                 for (int i = 0; i < allItems.size(); i++) {
                     Item item = allItems.get(i);
-                    //result.put(item.getItemID(), item.getAisle());
+                    result.put(item.getItemID(), item.getAisle());
                 }
             }
         }
@@ -37,9 +37,12 @@ public class InventoryService {
         if(inventory != null) {
             ArrayList<Item> allItems = inventory.getItems();
 
-            for (int i = 0; i < allItems.size(); i++) {
-                Item item = allItems.get(i);
-                //result.add(item.getPrice());
+            for (int i = 0; i < IDs.size(); i++) {
+                for(int j = 0; j < allItems.size();j++){
+                    if(IDs.get(i) == allItems.get(j).getItemID()){
+                        result.add(allItems.get(j).getPrice());
+                    }
+                }
             }
         }
         return result;
