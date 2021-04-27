@@ -12,6 +12,20 @@ public class RegisterModel {
      * Contains the list of purchased items
      */
     private ArrayList<PurchaseInfo> PurchaseItems;
+
+
+    public RegisterModel() {
+        super();
+        PurchaseItems = new ArrayList<>();
+
+        // mock model
+        // TODO: replace this
+        // ArrayList<PurchaseInfo> pinfo = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            // pinfo.add(new PurchaseInfo(i, 20.20 + i, 1));
+            PurchaseItems.add(new PurchaseInfo(i, 20.20 + i, 1));
+        }
+    }
     
     /**
      * Returns the list of purchased items

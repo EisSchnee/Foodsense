@@ -1,4 +1,5 @@
-package inventory;
+// package inventory;
+package FoodSense;
 
 /**
  * @author Joseph Grieser

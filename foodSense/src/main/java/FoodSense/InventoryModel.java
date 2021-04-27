@@ -1,4 +1,6 @@
-package inventory;
+// package inventory;
+package FoodSense;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
