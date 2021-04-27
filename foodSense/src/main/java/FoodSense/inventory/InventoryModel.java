@@ -62,4 +62,13 @@ public class InventoryModel {
         return null;
     }
 
+    public void updateItems(ArrayList<ArrayList<Integer>> list){
+        for(int x = 0; x < list.size(); x++){
+            for(int i: list.get(x)){
+                items.get(i).setAisle(x);
+            }
+        }
+        view.updateInventory(getItems());
+    }
+
 }
