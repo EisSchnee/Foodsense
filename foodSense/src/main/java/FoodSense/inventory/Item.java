@@ -8,7 +8,8 @@ public class Item {
     private int ItemID;
     private String name;
     private boolean inStock;
-    private String location;
+    private int aisle;
+    private int price;
 
     /**
      * Holds the information for an item in the store
@@ -19,14 +20,16 @@ public class Item {
         this.name = name;
         this.ItemID = ItemID;
         inStock = true;
-        location = "";
+        aisle = -1;
+        price = 0;
     }
 
-    public Item(String name, int ItemID, String location){
+    public Item(String name, int ItemID, int aisle){
         this.name = name;
         this.ItemID = ItemID;
         inStock = true;
-        this.location = location;
+        this.aisle = aisle;
+        price = 0;
     }
 
     /**
@@ -58,19 +61,35 @@ public class Item {
     }
 
     /**
-     * Retrieves location of item
+     * Retrieves aisle of item
      * @return location of item
      */
-    public String getLocation() {
-        return location;
+    public int getAisle() {
+        return aisle;
     }
 
     /**
-     * Changes location of item
-     * @param newLoc new location of item
+     * Changes aisle of item
+     * @param newAisle new aisle of item
      */
-    public void setLocation(String newLoc){
-        location = newLoc;
+    public void setAisle(int newAisle){
+        aisle = newAisle;
+    }
+
+    /**
+     * Retrieves price ot item
+     * @return price of item
+     */
+    public int getPrice(){
+        return price;
+    }
+
+    /**
+     * Changes the price of item
+     * @param price new price of item
+     */
+    public void setPrice(int price){
+        this.price = price;
     }
 
     /**
@@ -78,6 +97,6 @@ public class Item {
      * @return String of attributes in item
      */
     public String toString(){
-        return "Name: " + name + "  ID: " + ItemID + "  Location: " + location;
+        return "Name: " + name + "  ID: " + ItemID + "  Aisle: " + aisle + "  Price: " + price;
     }
 }
