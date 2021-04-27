@@ -40,6 +40,9 @@ public class ReorganizeController {
         //InventoryService.setInventory(inv);
     }
 
+    // TODO: implement me!
+    public ReorganizeController(InventoryController ic) {}
+
     public void setInventory(InventoryController inventory) {
         this.inventory = inventory;
         InventoryService.setInventory(inventory);
@@ -75,7 +78,7 @@ public class ReorganizeController {
                 stillRunning = false;
             }
         }
-        inventory.updateSorting(proximCalc.getLastSorting());
+        // inventory.updateSorting(proximCalc.getLastSorting()); // TODO: implement me!
         view.displayCompletionScreen();
     }
     @GetMapping("/sorter")

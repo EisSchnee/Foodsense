@@ -32,6 +32,9 @@ public class Item {
         price = 0;
     }
 
+    public Item(String name, int ItemID, String location){}
+
+
     /**
      * Retrieves the ID of the item
      * @return the ID of the item
