@@ -25,8 +25,8 @@ public class InventoryController {
         //view.setModel(model);
         //model.setController(this);
         model.setView(view);
-        //createItem("Pear",0,"Left"); //test code
-        //createItem("Apple",1,"Right");
+        createItem("Pear",0,1); //test code
+        createItem("Apple",1,0);
     }
 
     /**
@@ -45,10 +45,10 @@ public class InventoryController {
      * creates a new item
      * @param name name of item
      * @param ID ID of item
-     * @param location location of item
+     * @param aisle aisle of item
      */
-    public void createItem(String name, int ID, String location){
-        Item item = new Item(name,ID,location);
+    public void createItem(String name, int ID, int aisle){
+        Item item = new Item(name,ID,aisle);
         model.addItem(item);
     }
 
@@ -74,8 +74,16 @@ public class InventoryController {
         return "Low on " + name;
     }
 
+    /**
+     * updates the sorting of the inventory
+     * @param list list with new sorting
+     */
+    public void updateSorting(ArrayList<ArrayList<Integer>> list){
+        model.updateItems(list);;
+    }
+
     @GetMapping("/inventory")
-    public String displayInventory1(){
+    public String displayInventory(){
         return view.displayInventory();
     }
 
