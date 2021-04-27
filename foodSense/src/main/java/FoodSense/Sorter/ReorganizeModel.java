@@ -1,40 +1,20 @@
 package FoodSense.Sorter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 
 /**
  * @author Benjamin Grimes
  */
+
 public class ReorganizeModel {
 
     //used to store the items that were bought together (key) and the amount
     //of times said items have been bought together
     private HashMap<ArrayList<Integer>, Integer> matrix;
 
-    /******************************************************************************
-     * a subclass to store the list and occurences of items bought together.
-     * list will always be sorted to avoid separate entries for the same group.
-     *******************************************************************************/
-    protected class MatrixNode {
-        private ArrayList<Integer> items;
-        private int count;
-
-        MatrixNode(ArrayList<Integer> items, int count){
-            this.count = count;
-            items.sort(null);
-            this.items = items;
-        }
-
-        protected ArrayList<Integer> getItems(){
-            return items;
-        }
-
-        protected int getCount(){
-            return count;
-        }
+    public ReorganizeModel(){
+        matrix = new HashMap<>();
     }
 
     /**********************************************************************
@@ -43,8 +23,17 @@ public class ReorganizeModel {
      * @param data
      * purchase data that has been preprocessed by Apriori's Algorithm
      ************************************************************************/
-    private void UpdateMatrix(LinkedList<MatrixNode> data){
-        //TODO
+    protected void updateMatrix(LinkedList<ArrayList<Integer>> data){
+        Iterator<ArrayList<Integer>> iter = data.iterator();
+        while(iter.hasNext()){
+            ArrayList<Integer> next = iter.next();
+            next.sort(null);
+            Integer count = 1;
+            if(matrix.containsKey(next)){
+                count += matrix.get(next);
+            }
+            matrix.put(next, count);
+        }
     }
 
 
@@ -54,8 +43,15 @@ public class ReorganizeModel {
      * @return
      * All data stored within matrix in LinkedList format
      */
-    private LinkedList<MatrixNode> getPurchaseData(){
-        //TODO
-        return new LinkedList<MatrixNode>();
+    protected LinkedList<MatrixNode> getPurchaseData(){
+        LinkedList<MatrixNode> result = new LinkedList<>();
+        Set<ArrayList<Integer>> keySet = matrix.keySet();
+        Iterator<ArrayList<Integer>> iter = keySet.iterator();
+        while(iter.hasNext()){
+            ArrayList<Integer> nextKey = iter.next();
+            MatrixNode temp = new MatrixNode(nextKey, matrix.get(nextKey));
+            result.add(temp);
+        }
+        return result;
     }
 }
