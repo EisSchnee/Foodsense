@@ -1,6 +1,9 @@
 package FoodSense.Register;
 
 import java.util.ArrayList;
+import java.util.Map;
+
+import FoodSense.inventory.InventoryController;
 
 /**
  * Model class for the Register component
@@ -13,17 +16,26 @@ public class RegisterModel {
      */
     private ArrayList<PurchaseInfo> PurchaseItems;
 
+    /**
+     * InventoryController instance
+     */
+    private FoodSense.inventory.InventoryController inventory;
+
 
     public RegisterModel() {
-        super();
         PurchaseItems = new ArrayList<>();
-
-        // mock model
         // TODO: replace this
-        // ArrayList<PurchaseInfo> pinfo = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            // pinfo.add(new PurchaseInfo(i, 20.20 + i, 1));
+        for (int i = 0; i < 5; i++)
             PurchaseItems.add(new PurchaseInfo(i, 20.20 + i, 1));
+    }
+    public RegisterModel(InventoryController ic) {
+        PurchaseItems = new ArrayList<>();
+        inventory = ic;
+
+        if (inventory != null) {
+            // TODO: keys or values
+            Map<Integer, Integer> idMap = FoodSense.InventoryService.getActiveAislesAndIDs();
+            FoodSense.InventoryService.getPrices(inventory, new ArrayList<Integer>(idMap.values()));
         }
     }
     
@@ -33,6 +45,7 @@ public class RegisterModel {
      */
     public ArrayList<PurchaseInfo> getPurchaseItems()
     {
+        
         return this.PurchaseItems;
     }
     
@@ -46,59 +59,4 @@ public class RegisterModel {
         PurchaseItems.remove(id);
 		PurchaseItems.add(id, info);
     }
-
-
-    protected static class PurchaseInfo {
-
-        /**
-         * Item id for uniqueness
-         */
-        private int PurchaseId;
-        
-        /**
-         * Item price
-         */
-        private double Price;
-        
-        /**
-         * Item's quantity
-         */
-        private int Quantity;
-    
-        public PurchaseInfo(int id, double price, int quantity)
-        {
-            this.PurchaseId = id;
-            this.Price = price;
-            this.Quantity = quantity;
-        }
-    
-        /**
-         * Getter for a purchased item's id
-         * @return the id
-         */
-        public int getPurchaseId()
-        {
-            return this.PurchaseId;
-        }
-    
-        /**
-         * Getter for a purchased item's price
-         * @return the item's price
-         */
-        public double getPrice()
-        {
-            return this.Price;
-        }
-    
-        /**
-         * Getter for a purchased item's quantity
-         * @return the item's quantity
-         */
-        public int getQuantity()
-        {
-            return this.Quantity;
-        }   
-    
-    }
-
 }

@@ -72,6 +72,29 @@
             </form>
         </div>
 
+        <div th:if="${purchases != null && purchases.size() != 0}">
+            <hr>
+            <!-- <input th:if="purchases != null" type="button" id="btn-send-checkout-items" value="Send Checkout Items"> -->
+            <form action="/purchase-info" method="POST">
+                <input th:if="purchases != null" type="submit" value="Send Checkout Items">
+            </form>
+        </div>
+
+        <script>
+            const $btnSendCheckoutItems = document.getElementById('btn-send-checkout-items')
+            if ($btnSendCheckoutItems !== null) {
+                $btnSendCheckoutItems.addEventListener('click', () => {
+                    fetch('/purchase-info', {
+                        method: 'POST',
+                        body: JSON.stringify({ best: '-man' }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                })
+            }
+        </script>
+
     </div>
 
 </body>

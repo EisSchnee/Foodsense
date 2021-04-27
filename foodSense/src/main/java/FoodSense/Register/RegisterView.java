@@ -14,7 +14,7 @@ public class RegisterView {
      * @param list list of purchase infos
      * @return true on success false otherwise
      */
-    public boolean DisplayPurchase(ArrayList<RegisterModel.PurchaseInfo> list)
+    public boolean DisplayPurchase(ArrayList<PurchaseInfo> list)
     {
         // TODO: perform ui actions to render the list of purchased items
         return false;
