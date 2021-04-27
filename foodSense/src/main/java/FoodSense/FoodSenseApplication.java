@@ -17,7 +17,8 @@ public class FoodSenseApplication {
 
     public FoodSenseApplication(){
         inventory = new InventoryController();
-        sorter = new ReorganizeController(inventory);
+        sorter = new ReorganizeController();
+        sorter.setInventory(inventory);
         register = new RegisterController(inventory);
     }
 
