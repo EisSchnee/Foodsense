@@ -2,7 +2,7 @@ package FoodSense;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+//import java.util.LinkedList;
 
 import FoodSense.inventory.InventoryController;
 import FoodSense.inventory.Item;
@@ -13,7 +13,7 @@ import FoodSense.inventory.Item;
 public class InventoryService {
 
    static InventoryController inventory;
-   static void setInventory(InventoryController inv){
+   public static void setInventory(InventoryController inv){
        inventory = inv;
    }
 
@@ -21,10 +21,11 @@ public class InventoryService {
         HashMap<Integer, Integer> result = new HashMap<>();
         if(inventory != null) {
             ArrayList<Item> allItems = inventory.getItems();
-
-            for (int i = 0; i < allItems.size(); i++) {
-                Item item = allItems.get(i);
-                result.put(item.getItemID(), item.getAisle());
+            if(allItems != null) {
+                for (int i = 0; i < allItems.size(); i++) {
+                    Item item = allItems.get(i);
+                    //result.put(item.getItemID(), item.getAisle());
+                }
             }
         }
         return result;
@@ -38,7 +39,7 @@ public class InventoryService {
 
             for (int i = 0; i < allItems.size(); i++) {
                 Item item = allItems.get(i);
-                result.add(item.getPrice());
+                //result.add(item.getPrice());
             }
         }
         return result;

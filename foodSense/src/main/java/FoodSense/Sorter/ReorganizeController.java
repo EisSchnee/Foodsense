@@ -1,13 +1,19 @@
 package FoodSense.Sorter;
 
+import FoodSense.InventoryService;
 import FoodSense.inventory.InventoryController;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -16,6 +22,7 @@ import java.util.LinkedList;
  */
 @SpringBootApplication
 @RestController
+@Service
 public class ReorganizeController {
 
     double progress;
@@ -24,12 +31,23 @@ public class ReorganizeController {
     ProximityCalculatorService proximCalc;
     InventoryController inventory;
 
-    public ReorganizeController(InventoryController inv) {
+    /**
+     * constructor for reorganizeController. also need to
+     * setInventory for it to work.
+     */
+    public ReorganizeController() {
         model = new ReorganizeModel();
         view = new ReorganizeView();
         progress = 0;
         proximCalc = new ProximityCalculatorService();
-        inventory = inv;
+        inventory = new InventoryController();
+        //inventory = inv;
+        //InventoryService.setInventory(inv);
+    }
+
+    public void setInventory(InventoryController inventory) {
+        this.inventory = inventory;
+        InventoryService.setInventory(inventory);
     }
 
     /***************************************************************************
@@ -62,15 +80,25 @@ public class ReorganizeController {
                 stillRunning = false;
             }
         }
-        inventory.updateSorting(proximCalc.getLastSorting());
+        //inventory.updateSorting(proximCalc.getLastSorting());
         view.displayCompletionScreen();
     }
     @GetMapping("/sorter")
     public String display(){
         return view.displayScreen();
     }
-    @Bean
-    public InventoryController satisfyBean() {
-        return new InventoryController();
+    @PostMapping("/sorter")
+    @PutMapping("/sorter")
+    public String run(){
+        reorganize();
+        return view.displayScreen();
     }
+    /*
+    public static void main(String[] args) {
+        SpringApplication.run(ReorganizeController.class,args);
+        SpringApplication app = new SpringApplication(ReorganizeController.class);
+        //SpringApplication application = new SpringApplication();
+        //InventoryController controller = new InventoryController();
+        //SpringApplication.run(controller.class,args);
+    }*/
 }
