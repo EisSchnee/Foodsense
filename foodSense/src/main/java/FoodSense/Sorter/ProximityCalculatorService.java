@@ -46,6 +46,8 @@ public class ProximityCalculatorService implements Runnable{
      */
     public ProximityCalculatorService() {
         progress = 0;
+        progressLocked = false;
+        purchaseData = new LinkedList<>();
     }
 
 
