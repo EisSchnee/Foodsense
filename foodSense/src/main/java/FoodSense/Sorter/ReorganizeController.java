@@ -2,6 +2,7 @@ package FoodSense.Sorter;
 
 import FoodSense.InventoryService;
 import FoodSense.inventory.InventoryController;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,9 +41,6 @@ public class ReorganizeController {
         //InventoryService.setInventory(inv);
     }
 
-    // TODO: implement me!
-    public ReorganizeController(InventoryController ic) {}
-
     public void setInventory(InventoryController inventory) {
         this.inventory = inventory;
         InventoryService.setInventory(inventory);
@@ -73,30 +71,31 @@ public class ReorganizeController {
         while(stillRunning){
             double progress = proximCalc.getProgress();
             view.updateProgressBar(progress);
-            view.displayProgressBar();
+            view.displayScreen();
             if(progress == 100){
                 stillRunning = false;
             }
         }
-        // inventory.updateSorting(proximCalc.getLastSorting()); // TODO: implement me!
-        view.displayCompletionScreen();
+        inventory.updateSorting(proximCalc.getLastSorting());
+        view.displayScreen();
     }
     @GetMapping("/sorter")
     public String display(){
         return view.displayScreen();
     }
+
     @PostMapping("/sorter")
     @PutMapping("/sorter")
     public String run(){
         reorganize();
         return view.displayScreen();
     }
-    /*
+
     public static void main(String[] args) {
         SpringApplication.run(ReorganizeController.class,args);
-        SpringApplication app = new SpringApplication(ReorganizeController.class);
+        //SpringApplication app = new SpringApplication(ReorganizeController.class);
         //SpringApplication application = new SpringApplication();
         //InventoryController controller = new InventoryController();
         //SpringApplication.run(controller.class,args);
-    }*/
+    }
 }
