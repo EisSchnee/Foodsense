@@ -46,6 +46,8 @@ public class ProximityCalculatorService implements Runnable{
      */
     public ProximityCalculatorService() {
         progress = 0;
+        progressLocked = false;
+        purchaseData = new LinkedList<>();
     }
 
 
@@ -219,7 +221,7 @@ public class ProximityCalculatorService implements Runnable{
             ListIterator<LinkedList<MatrixNode>> sizeIter = aisle.listIterator();
 
             //the current group of items that are being examined in purchases
-            LinkedList<Integer> itemGroup = new LinkedList<Integer>();
+            LinkedList<Integer> itemGroup = new LinkedList<>();
 
             //the resulting sorted aisle
             ArrayList<Integer> sortedAisle = new ArrayList<>();

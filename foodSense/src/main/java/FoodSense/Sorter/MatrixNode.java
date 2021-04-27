@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * moved from ReorganizeModel for easier access for ProximityCalculator.
  *******************************************************************************/
 public class MatrixNode {
-    private ArrayList<Integer> items;
+    private final ArrayList<Integer> items;
     private int count;
 
     MatrixNode(ArrayList<Integer> items, int count){
