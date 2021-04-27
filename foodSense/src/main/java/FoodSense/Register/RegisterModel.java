@@ -26,16 +26,18 @@ public class RegisterModel {
         PurchaseItems = new ArrayList<>();
         // TODO: replace this
         for (int i = 0; i < 5; i++)
-            PurchaseItems.add(new PurchaseInfo(i, 20.20 + i, 1));
+            PurchaseItems.add(new PurchaseInfo(i, 20.20 + i/100, 1));        
     }
     public RegisterModel(InventoryController ic) {
         PurchaseItems = new ArrayList<>();
         inventory = ic;
 
         if (inventory != null) {
-            // TODO: keys or values
-            Map<Integer, Integer> idMap = FoodSense.InventoryService.getActiveAislesAndIDs();
-            FoodSense.InventoryService.getPrices(inventory, new ArrayList<Integer>(idMap.values()));
+            getPurchaseItems();
+        } else {
+            // TODO: replace this
+            for (int i = 0; i < 5; i++)
+                PurchaseItems.add(new PurchaseInfo(i, 20.20 + i, 1));
         }
     }
     
@@ -46,6 +48,17 @@ public class RegisterModel {
     public ArrayList<PurchaseInfo> getPurchaseItems()
     {
         
+        Map<Integer, Integer> idMap = FoodSense.InventoryService.getActiveAislesAndIDs();
+        System.out.println(idMap);
+        ArrayList<Integer> ids = new ArrayList<Integer>(idMap.keySet());
+        System.out.printf("[RegisterModel(ic)] ids: %s\n", ids);
+        ArrayList<Double> prices = FoodSense.InventoryService.getPrices(inventory, ids);
+        System.out.printf("[RegisterModel(ic)] prices: %s\n", prices);
+        
+        // PurchaseItems.clear();
+        for (int i = 0; i < ids.size() && i < prices.size(); i++)
+            PurchaseItems.add(new PurchaseInfo(ids.get(i), prices.get(i), 1));
+
         return this.PurchaseItems;
     }
     

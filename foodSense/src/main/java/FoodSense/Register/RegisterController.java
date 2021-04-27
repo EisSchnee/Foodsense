@@ -46,8 +46,8 @@ public class RegisterController {
     }
     public RegisterController(FoodSense.inventory.InventoryController ic) {
         _view = new RegisterView();
-        _model = new RegisterModel();
-        // _model = new RegisterModel(ic);
+        // _model = new RegisterModel();
+        _model = new RegisterModel(ic);
     }
 
     /**
