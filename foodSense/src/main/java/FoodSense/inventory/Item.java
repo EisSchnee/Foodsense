@@ -9,7 +9,7 @@ public class Item {
     private String name;
     private boolean inStock;
     private int aisle;
-    private int price;
+    private double price;
 
     /**
      * Holds the information for an item in the store
@@ -80,7 +80,7 @@ public class Item {
      * Retrieves price ot item
      * @return price of item
      */
-    public int getPrice(){
+    public double getPrice(){
         return price;
     }
 
@@ -88,7 +88,7 @@ public class Item {
      * Changes the price of item
      * @param price new price of item
      */
-    public void setPrice(int price){
+    public void setPrice(double price){
         this.price = price;
     }
 
